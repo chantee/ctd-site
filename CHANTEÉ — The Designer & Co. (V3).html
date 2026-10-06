@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CHANTEÉ — The Designer & Co.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --black: #0A0A0A;
+  --white: #FFFFFF;
+  --off-white: #F4F4F1;
+  --gray-100: #E8E8E4;
+  --gray-200: #D0D0CC;
+  --gray-400: #8A8A86;
+  --gray-600: #5A5A57;
+  --gray-800: #2A2A28;
+  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: env(safe-area-inset-top, 0px); }
+
+body {
+  font-family: var(--font-body);
+  color: var(--black);
+  background: var(--white);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+
+/* ═══ NAV ═══ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.5rem 2.5rem;
+  background: rgba(255,255,255,0);
+  transition: background 0.4s, backdrop-filter 0.4s;
+  mix-blend-mode: normal;
+}
+
+.nav.scrolled {
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.nav-wordmark {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
+
+.nav-links a {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--gray-600);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--black); }
+
+.nav-links .nav-cta {
+  color: var(--white);
+  background: var(--black);
+  padding: 0.55rem 1.4rem;
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.02em;
+  transition: background 0.2s;
+}
+
+.nav-links .nav-cta:hover { background: var(--gray-800); }
+
+.nav-toggle { display: none; flex-direction: column; gap: 5px; }
+.nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--black); transition: 0.3s; }
+
+/* ═══ HERO ═══ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 2.5rem 5rem;
+  position: relative;
+}
+
+.hero-content {
+  max-width: 900px;
+}
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(3.2rem, 8vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.hero-sub {
+  font-size: 1.05rem;
+  font-weight: 300;
+  color: var(--gray-600);
+  max-width: 48ch;
+  line-height: 1.65;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 2rem;
+  right: 2.5rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--gray-400);
+  writing-mode: vertical-rl;
+}
+
+/* ═══ WORK / CASE STUDIES ═══ */
+.work { padding: 6rem 2.5rem; }
+
+.work-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--gray-400);
+}
+
+.work-header a {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  border-bottom: 1px solid var(--gray-200);
+  padding-bottom: 2px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.work-header a:hover { color: var(--black); border-color: var(--black); }
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.work-card {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  display: block;
+}
+
+.work-card-img {
+  width: 100%;
+  aspect-ratio: 16/11;
+  background: var(--gray-100);
+  transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Each card gets a distinct look using color/pattern */
+.work-card:nth-child(1) .work-card-img { background: #1a1a1a; color: #fff; }
+.work-card:nth-child(2) .work-card-img { background: #D4C9B0; color: #2a2a2a; }
+.work-card:nth-child(3) .work-card-img { background: #2D4A3E; color: #fff; }
+.work-card:nth-child(4) .work-card-img { background: #E8E0D4; color: #2a2a2a; }
+
+.work-card-img .card-label {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-align: center;
+  padding: 2rem;
+}
+
+.work-card:hover .work-card-img { transform: scale(1.03); }
+
+.work-card-info {
+  padding: 1.1rem 0 0;
+}
+
+.work-card-info h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.01em;
+}
+
+.work-card-info p {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  font-weight: 300;
+}
+
+.work-card-tag {
+  display: inline-block;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--gray-400);
+  margin-top: 0.5rem;
+}
+
+/* ═══ ABOUT STRIP ═══ */
+.about-strip {
+  padding: 8rem 2.5rem;
+  background: var(--black);
+  color: var(--white);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+.about-strip-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.8rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.about-strip-text p {
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 1.25rem;
+}
+
+.about-strip-text a {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--white);
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 2px;
+  transition: border-color 0.2s;
+}
+
+.about-strip-text a:hover { border-color: var(--white); }
+
+/* ═══ SERVICES ═══ */
+.services { padding: 6rem 2.5rem; }
+
+.services-header { margin-bottom: 3rem; }
+
+.services-list { border-top: 1px solid var(--gray-200); }
+
+.service-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--gray-200);
+  transition: padding-left 0.3s, background 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.service-row:hover { padding-left: 1rem; background: var(--off-white); }
+
+.service-row h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.service-row p {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  font-weight: 300;
+}
+
+.service-row .arr {
+  font-size: 1.3rem;
+  color: var(--gray-200);
+  transition: color 0.2s, transform 0.2s;
+}
+
+.service-row:hover .arr { color: var(--black); transform: translateX(4px); }
+
+/* ═══ TESTIMONIAL ═══ */
+.testimonial {
+  padding: 6rem 2.5rem;
+  background: var(--off-white);
+}
+
+.testimonial-inner {
+  max-width: 720px;
+}
+
+.testimonial blockquote {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+  margin-bottom: 2rem;
+}
+
+.testimonial-credit {
+  font-size: 0.78rem;
+  color: var(--gray-600);
+}
+
+.testimonial-credit strong {
+  color: var(--black);
+  font-weight: 600;
+}
+
+/* ═══ PRICING ═══ */
+.pricing { padding: 6rem 2.5rem; }
+
+.pricing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.pricing-header p {
+  font-size: 0.88rem;
+  color: var(--gray-600);
+  font-weight: 300;
+  max-width: 40ch;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.pricing-card {
+  border: 1px solid var(--gray-200);
+  padding: 2.25rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+}
+
+.pricing-card:hover {
+  border-color: var(--black);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+}
+
+.pricing-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-card p {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.pricing-card .price {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ═══ CONTACT ═══ */
+.contact {
+  padding: 6rem 2.5rem;
+  background: var(--black);
+  color: var(--white);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+}
+
+.contact-left h2 {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.contact-left > p {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+  margin-bottom: 2.5rem;
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.contact-channel {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.2s;
+}
+
+.contact-channel:hover { color: var(--white); }
+
+.contact-channel-label {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.3);
+  width: 60px;
+  flex-shrink: 0;
+}
+
+.contact-form { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+.form-field label {
+  display: block;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 0.75rem 0;
+  border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: var(--white);
+  outline: none;
+  transition: border-color 0.3s;
+  -webkit-appearance: none;
+  border-radius: 0;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: rgba(255,255,255,0.6);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: rgba(255,255,255,0.25);
+}
+
+.form-field select option { background: var(--black); color: var(--white); }
+
+.form-field textarea { resize: vertical; min-height: 100px; }
+
+.btn-submit {
+  align-self: flex-start;
+  background: var(--white);
+  color: var(--black);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.85rem 2.5rem;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover { background: var(--gray-100); transform: translateY(-1px); }
+
+/* ═══ FOOTER ═══ */
+.footer {
+  padding: 2rem 2.5rem;
+  background: var(--black);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--white);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-left {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-right {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.footer-right a {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.35);
+  transition: color 0.2s;
+}
+
+.footer-right a:hover { color: var(--white); }
+
+/* ═══ REVEAL ═══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.4,0,0.2,1);
+}
+
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ═══ RESPONSIVE ═══ */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links.open {
+    display: flex; flex-direction: column;
+    position: fixed; inset: 0;
+    background: var(--white);
+    justify-content: center; align-items: center;
+    gap: 2rem; z-index: 105;
+  }
+  .nav-links.open a { font-size: 1.1rem; color: var(--black); }
+  .work-grid { grid-template-columns: 1fr; }
+  .about-strip { grid-template-columns: 1fr; gap: 2.5rem; padding: 5rem 2.5rem; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .service-row { grid-template-columns: 1fr auto; }
+  .service-row p { display: none; }
+}
+
+@media (max-width: 600px) {
+  .hero { padding: 0 1.5rem 4rem; }
+  .hero h1 { font-size: 2.6rem; }
+  .work, .services, .pricing { padding: 4rem 1.5rem; }
+  .about-strip, .contact { padding: 4rem 1.5rem; }
+  .footer { padding: 1.5rem; flex-direction: column; text-align: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition-duration: 0.01ms !important; }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Keep it light — agency sites like Collins/Pentagram are white-bg */
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-wordmark">Chanteé</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content reveal">
+    <h1>Make your brand as valuable as it is unforgettable.</h1>
+    <p class="hero-sub">Brand identity, book design, and web design for female entrepreneurs and thought leaders who refuse to blend in.</p>
+  </div>
+  <span class="hero-scroll">Scroll</span>
+</section>
+
+<!-- WORK -->
+<section class="work" id="work">
+  <div class="work-header reveal">
+    <span class="section-title">Selected Work</span>
+    <a href="#">View All Projects</a>
+  </div>
+  <div class="work-grid">
+    <a href="#" class="work-card reveal">
+      <div class="work-card-img">
+        <span class="card-label">Becoming Studios</span>
+      </div>
+      <div class="work-card-info">
+        <h3>Becoming Studios</h3>
+        <p>A polished brand identity that elevated positioning and strengthened conversions for a high-end coaching business.</p>
+        <span class="work-card-tag">Brand Identity</span>
+      </div>
+    </a>
+    <a href="#" class="work-card reveal">
+      <div class="work-card-img">
+        <span class="card-label">Project Name</span>
+      </div>
+      <div class="work-card-info">
+        <h3>Project Name</h3>
+        <p>Custom book cover and interior typesetting that honored the author's voice and vision.</p>
+        <span class="work-card-tag">Book Design</span>
+      </div>
+    </a>
+    <a href="#" class="work-card reveal">
+      <div class="work-card-img">
+        <span class="card-label">Project Name</span>
+      </div>
+      <div class="work-card-info">
+        <h3>Project Name</h3>
+        <p>A luxury web presence designed to convert and communicate authority from the first scroll.</p>
+        <span class="work-card-tag">Web Design</span>
+      </div>
+    </a>
+    <a href="#" class="work-card reveal">
+      <div class="work-card-img">
+        <span class="card-label">Project Name</span>
+      </div>
+      <div class="work-card-info">
+        <h3>Project Name</h3>
+        <p>End-to-end brand transformation from strategy through every customer touchpoint.</p>
+        <span class="work-card-tag">Full Brand Suite</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-strip" id="about">
+  <div class="reveal">
+    <h2 class="about-strip-headline">We design brands that command attention.</h2>
+  </div>
+  <div class="about-strip-text reveal">
+    <p>Chanteé The Designer & Co. is a brand identity studio dedicated to amplifying the visions of female entrepreneurs and thought leaders who value premium, intentional design.</p>
+    <p>Every project is personal. Your brand should feel like an extension of you — polished, powerful, and positioned for growth. When we work together, you get more than deliverables. You get a creative partner invested in your success.</p>
+    <a href="#contact">Work with us →</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="services-header reveal">
+    <span class="section-title">Services</span>
+  </div>
+  <div class="services-list">
+    <a href="#contact" class="service-row reveal">
+      <h3>Brand Identity Design</h3>
+      <p>Logos, color systems, typography, brand guidelines, and collateral.</p>
+      <span class="arr">→</span>
+    </a>
+    <a href="#contact" class="service-row reveal">
+      <h3>Book Cover & Typesetting</h3>
+      <p>Cover design, interior layout, and print-ready production files.</p>
+      <span class="arr">→</span>
+    </a>
+    <a href="#contact" class="service-row reveal">
+      <h3>Web Design</h3>
+      <p>Custom websites built to convert, captivate, and scale with you.</p>
+      <span class="arr">→</span>
+    </a>
+    <a href="#contact" class="service-row reveal">
+      <h3>Brand Strategy</h3>
+      <p>Positioning, messaging, and competitive differentiation.</p>
+      <span class="arr">→</span>
+    </a>
+    <a href="#contact" class="service-row reveal">
+      <h3>Brand Collateral & Print</h3>
+      <p>Business cards, social templates, packaging, and beyond.</p>
+      <span class="arr">→</span>
+    </a>
+  </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial">
+  <div class="testimonial-inner reveal">
+    <blockquote>"She not only designed a logo that exceeded my expectations, but created a brand identity that captures the essence of my company. Her communication and attention to detail made my experience truly top-tier."</blockquote>
+    <div class="testimonial-credit">
+      <strong>Tamara Jackson</strong> — Owner, Becoming Studios
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header reveal">
+    <span class="section-title">Investment</span>
+    <p>Every package is tailored. Here's a starting point — reach out and we'll scope something custom.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <div>
+        <h3>Brand Foundation</h3>
+        <p>Logo, color palette, typography, and brand board.</p>
+      </div>
+      <span class="price">From $X,XXX</span>
+    </div>
+    <div class="pricing-card reveal">
+      <div>
+        <h3>Full Brand Identity</h3>
+        <p>Complete visual identity system, guidelines, and collateral suite.</p>
+      </div>
+      <span class="price">From $X,XXX</span>
+    </div>
+    <div class="pricing-card reveal">
+      <div>
+        <h3>Book Design</h3>
+        <p>Cover design, interior typesetting, and print-ready layout.</p>
+      </div>
+      <span class="price">From $X,XXX</span>
+    </div>
+    <div class="pricing-card reveal">
+      <div>
+        <h3>Web Design</h3>
+        <p>Custom site designed and developed to match your brand.</p>
+      </div>
+      <span class="price">From $X,XXX</span>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-grid">
+    <div class="contact-left reveal">
+      <h2>Let's Build Something Worth Noticing.</h2>
+      <p>Have a project in mind? Fill out the form or reach out directly. Whether you have a clear vision or you're still exploring — the conversation starts here.</p>
+      <div class="contact-channels">
+        <a href="mailto:hello@chanteethedesigner.com" class="contact-channel">
+          <span class="contact-channel-label">Email</span>
+          hello@chanteethedesigner.com
+        </a>
+        <a href="#" class="contact-channel">
+          <span class="contact-channel-label">Chat</span>
+          Instagram DMs
+        </a>
+        <a href="#" class="contact-channel">
+          <span class="contact-channel-label">Book</span>
+          Schedule a discovery call
+        </a>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-field">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane">
+        </div>
+        <div class="form-field">
+          <label>Last Name</label>
+          <input type="text" placeholder="Doe">
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" placeholder="hello@yourbrand.com">
+      </div>
+      <div class="form-field">
+        <label>Service</label>
+        <select>
+          <option value="" disabled selected>Select a service</option>
+          <option>Brand Identity Design</option>
+          <option>Book Cover & Typesetting</option>
+          <option>Web Design</option>
+          <option>Full Brand Suite</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Project Details</label>
+        <textarea placeholder="Tell me about your vision, timeline, and goals..."></textarea>
+      </div>
+      <button class="btn-submit" type="button">Send Inquiry</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="footer-left">© 2026 Chanteé The Designer & Co.</span>
+  <ul class="footer-right">
+    <li><a href="#">Instagram</a></li>
+    <li><a href="#">LinkedIn</a></li>
+    <li><a href="#">Twitter</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+
+const toggle = document.getElementById('navToggle');
+const links = document.getElementById('navLinks');
+toggle.addEventListener('click', () => links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
