@@ -6,22 +6,27 @@
 <title>CHANTEÉ — The Designer & Co.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://use.typekit.net/lvu6osz.css">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 :root {
-  --black: #0A0A0A;
+  --teal: #165C50;
+  --sage: #A4D2C4;
+  --brown-dark: #5A3E2B;
+  --copper: #8C4535;
+  --near-black: #201920;
+  --cream: #F9F8F5;
   --white: #FFFFFF;
-  --off-white: #F4F4F1;
-  --gray-100: #E8E8E4;
-  --gray-200: #D0D0CC;
-  --gray-400: #8A8A86;
-  --gray-600: #5A5A57;
-  --gray-800: #2A2A28;
-  --font-display: 'Space Grotesk', system-ui, sans-serif;
+  --text: var(--near-black);
+  --text-muted: #6B6368;
+  --accent: var(--teal);
+  --border: #DDD8D4;
+  --border-light: #EBE7E3;
+  --font-display: "big-caslon-fb", Georgia, serif;
+  --font-subtitle: 'Montserrat', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
-  box-sizing: border-box;
   padding-top: env(safe-area-inset-top, 0px);
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -30,8 +35,8 @@ html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: env(safe-ar
 
 body {
   font-family: var(--font-body);
-  color: var(--black);
-  background: var(--white);
+  color: var(--text);
+  background: var(--cream);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
@@ -40,56 +45,64 @@ body {
 a { color: inherit; text-decoration: none; }
 button { cursor: pointer; border: none; background: none; font-family: inherit; }
 
+/* ═══ LAYOUT ═══ */
+.container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+}
+
 /* ═══ NAV ═══ */
 .nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; justify-content: space-between; align-items: center;
   padding: 1.5rem 2.5rem;
-  background: rgba(255,255,255,0);
   transition: background 0.4s, backdrop-filter 0.4s;
-  mix-blend-mode: normal;
 }
 
 .nav.scrolled {
-  background: rgba(255,255,255,0.92);
+  background: rgba(249,248,245,0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--border-light);
 }
 
 .nav-wordmark {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-family: var(--font-subtitle);
+  font-size: 0.78rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--near-black);
 }
 
 .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
 
 .nav-links a {
-  font-family: var(--font-body);
-  font-size: 0.8rem;
-  font-weight: 400;
-  color: var(--gray-600);
+  font-family: var(--font-subtitle);
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
   transition: color 0.2s;
 }
 
-.nav-links a:hover { color: var(--black); }
+.nav-links a:hover { color: var(--near-black); }
 
 .nav-links .nav-cta {
   color: var(--white);
-  background: var(--black);
-  padding: 0.55rem 1.4rem;
-  font-weight: 500;
-  font-size: 0.75rem;
-  letter-spacing: 0.02em;
+  background: var(--teal);
+  padding: 0.6rem 1.5rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
   transition: background 0.2s;
 }
 
-.nav-links .nav-cta:hover { background: var(--gray-800); }
+.nav-links .nav-cta:hover { background: var(--brown-dark); }
 
 .nav-toggle { display: none; flex-direction: column; gap: 5px; }
-.nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--black); transition: 0.3s; }
+.nav-toggle span { display: block; width: 22px; height: 1.5px; background: var(--near-black); transition: 0.3s; }
 
 /* ═══ HERO ═══ */
 .hero {
@@ -97,45 +110,100 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 2.5rem 5rem;
+  padding: 0 0 2.5rem;
   position: relative;
 }
 
 .hero-content {
-  max-width: 900px;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 2.5rem;
+  width: 100%;
 }
 
-.hero h1 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(3.2rem, 8vw, 7rem);
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
-  margin-bottom: 2rem;
+/* Hero bar-reveal animation */
+.hero-reveal {
+  position: relative;
+}
+
+.hero-bar {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  top: 50%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 2;
+  pointer-events: none;
+  will-change: transform, width, height, opacity, left, top;
 }
 
 .hero-sub {
-  font-size: 1.05rem;
-  font-weight: 300;
-  color: var(--gray-600);
-  max-width: 48ch;
-  line-height: 1.65;
+  opacity: 0;
+  transform: translateY(15px);
+}
+
+/* Reduced motion: skip animation, show everything */
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 { clip-path: none !important; }
+  .hero-sub { opacity: 1 !important; transform: none !important; }
+  .hero-bar { display: none !important; }
+}
+
+.hero h1 {
+  clip-path: polygon(0% 0%, -30% 0%, 0% 100%, 0% 100%);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(2.8rem, 7vw, 5.8rem);
+  line-height: 1.08;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 1.75rem;
+  max-width: 1050px;
+}
+
+.hero-sub {
+  font-family: var(--font-subtitle);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  max-width: 55ch;
+  line-height: 1.9;
 }
 
 .hero-scroll {
   position: absolute;
   bottom: 2rem;
   right: 2.5rem;
-  font-size: 0.65rem;
+  font-family: var(--font-subtitle);
+  font-size: 0.6rem;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--gray-400);
+  letter-spacing: 0.25em;
+  color: var(--text-muted);
   writing-mode: vertical-rl;
+  opacity: 0.4;
 }
 
-/* ═══ WORK / CASE STUDIES ═══ */
-.work { padding: 6rem 2.5rem; }
+/* ═══ SECTION SHARED ═══ */
+.section-title {
+  font-family: var(--font-subtitle);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+/* ═══ WORK ═══ */
+.work { padding: 6rem 0; background: var(--white); }
 
 .work-header {
   display: flex;
@@ -146,24 +214,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 1rem;
 }
 
-.section-title {
-  font-family: var(--font-display);
-  font-size: 0.72rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--gray-400);
-}
-
 .work-header a {
-  font-size: 0.78rem;
-  color: var(--gray-400);
-  border-bottom: 1px solid var(--gray-200);
+  font-family: var(--font-subtitle);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
   padding-bottom: 2px;
   transition: color 0.2s, border-color 0.2s;
 }
 
-.work-header a:hover { color: var(--black); border-color: var(--black); }
+.work-header a:hover { color: var(--teal); border-color: var(--teal); }
 
 .work-grid {
   display: grid;
@@ -181,64 +242,70 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .work-card-img {
   width: 100%;
   aspect-ratio: 16/11;
-  background: var(--gray-100);
   transition: transform 0.5s cubic-bezier(0.4,0,0.2,1);
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  position: relative;
 }
 
-/* Each card gets a distinct look using color/pattern */
-.work-card:nth-child(1) .work-card-img { background: #1a1a1a; color: #fff; }
-.work-card:nth-child(2) .work-card-img { background: #D4C9B0; color: #2a2a2a; }
-.work-card:nth-child(3) .work-card-img { background: #2D4A3E; color: #fff; }
-.work-card:nth-child(4) .work-card-img { background: #E8E0D4; color: #2a2a2a; }
+.work-card:nth-child(1) .work-card-img { background: var(--teal); color: var(--cream); }
+.work-card:nth-child(2) .work-card-img { background: var(--sage); color: var(--near-black); }
+.work-card:nth-child(3) .work-card-img { background: var(--near-black); color: var(--sage); }
+.work-card:nth-child(4) .work-card-img { background: var(--copper); color: var(--cream); }
 
 .work-card-img .card-label {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 3vw, 2.4rem);
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  font-family: var(--font-subtitle);
+  font-weight: 700;
+  font-size: clamp(1rem, 2vw, 1.5rem);
+  text-transform: uppercase;
   text-align: center;
   padding: 2rem;
+  letter-spacing: 0.08em;
 }
 
 .work-card:hover .work-card-img { transform: scale(1.03); }
 
-.work-card-info {
-  padding: 1.1rem 0 0;
-}
+.work-card-info { padding: 1.1rem 0 0; }
 
 .work-card-info h3 {
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  letter-spacing: -0.01em;
+  font-family: var(--font-subtitle);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--near-black);
+  margin-bottom: 0.3rem;
 }
 
 .work-card-info p {
   font-size: 0.82rem;
-  color: var(--gray-600);
+  color: var(--text-muted);
   font-weight: 300;
+  line-height: 1.6;
 }
 
 .work-card-tag {
   display: inline-block;
-  font-size: 0.62rem;
+  font-family: var(--font-subtitle);
+  font-size: 0.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--gray-400);
+  letter-spacing: 0.14em;
+  color: var(--accent);
+  font-weight: 700;
   margin-top: 0.5rem;
 }
 
 /* ═══ ABOUT STRIP ═══ */
 .about-strip {
   padding: 8rem 2.5rem;
-  background: var(--black);
-  color: var(--white);
+  background: var(--near-black);
+  color: var(--cream);
+}
+
+.about-strip-inner {
+  max-width: 1240px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
@@ -247,38 +314,90 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .about-strip-headline {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.5vw, 3.8rem);
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.8rem, 4.2vw, 3.4rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
+  color: var(--sage);
 }
 
 .about-strip-text p {
   font-size: 0.95rem;
   font-weight: 300;
   line-height: 1.75;
-  color: rgba(255,255,255,0.65);
+  color: rgba(249,248,245,0.6);
   margin-bottom: 1.25rem;
 }
 
 .about-strip-text a {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--white);
-  border-bottom: 1px solid rgba(255,255,255,0.3);
+  font-family: var(--font-subtitle);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--sage);
+  border-bottom: 1px solid rgba(164,210,196,0.3);
   padding-bottom: 2px;
   transition: border-color 0.2s;
 }
 
-.about-strip-text a:hover { border-color: var(--white); }
+.about-strip-text a:hover { border-color: var(--sage); }
+
+/* ═══ TESTIMONIAL ═══ */
+.testimonial {
+  padding: 6rem 0;
+  background: var(--sage);
+}
+
+.testimonial-inner { max-width: 720px; }
+
+.testimonial blockquote {
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.7;
+  color: var(--near-black);
+  margin-bottom: 2rem;
+}
+
+.testimonial-credit {
+  font-family: var(--font-subtitle);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+}
+
+.testimonial-credit span {
+  font-weight: 500;
+  color: var(--brown-dark);
+}
+
+/* ═══ VIDEO REEL ═══ */
+.video-reel {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: var(--near-black);
+}
+
+.video-reel:not(.has-video) { display: none; }
+
+.video-reel video {
+  width: 100%;
+  display: block;
+  object-fit: cover;
+}
 
 /* ═══ SERVICES ═══ */
-.services { padding: 6rem 2.5rem; }
+.services { padding: 6rem 0; background: var(--white); }
 
 .services-header { margin-bottom: 3rem; }
 
-.services-list { border-top: 1px solid var(--gray-200); }
+.services-list { border-top: 1px solid var(--border); }
 
 .service-row {
   display: grid;
@@ -286,66 +405,39 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 2rem;
   align-items: center;
   padding: 1.6rem 0;
-  border-bottom: 1px solid var(--gray-200);
+  border-bottom: 1px solid var(--border);
   transition: padding-left 0.3s, background 0.3s;
   cursor: pointer;
   text-decoration: none;
 }
 
-.service-row:hover { padding-left: 1rem; background: var(--off-white); }
+.service-row:hover { padding-left: 1rem; background: rgba(164,210,196,0.08); }
 
 .service-row h3 {
-  font-family: var(--font-display);
-  font-size: 1.3rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
+  font-family: var(--font-subtitle);
+  font-size: 1.05rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--near-black);
 }
 
 .service-row p {
   font-size: 0.82rem;
-  color: var(--gray-600);
+  color: var(--text-muted);
   font-weight: 300;
 }
 
 .service-row .arr {
   font-size: 1.3rem;
-  color: var(--gray-200);
+  color: var(--border);
   transition: color 0.2s, transform 0.2s;
 }
 
-.service-row:hover .arr { color: var(--black); transform: translateX(4px); }
-
-/* ═══ TESTIMONIAL ═══ */
-.testimonial {
-  padding: 6rem 2.5rem;
-  background: var(--off-white);
-}
-
-.testimonial-inner {
-  max-width: 720px;
-}
-
-.testimonial blockquote {
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.8vw, 2rem);
-  font-weight: 500;
-  line-height: 1.4;
-  letter-spacing: -0.02em;
-  margin-bottom: 2rem;
-}
-
-.testimonial-credit {
-  font-size: 0.78rem;
-  color: var(--gray-600);
-}
-
-.testimonial-credit strong {
-  color: var(--black);
-  font-weight: 600;
-}
+.service-row:hover .arr { color: var(--teal); transform: translateX(4px); }
 
 /* ═══ PRICING ═══ */
-.pricing { padding: 6rem 2.5rem; }
+.pricing { padding: 6rem 0; background: var(--white); }
 
 .pricing-header {
   display: flex;
@@ -358,7 +450,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .pricing-header p {
   font-size: 0.88rem;
-  color: var(--gray-600);
+  color: var(--text-muted);
   font-weight: 300;
   max-width: 40ch;
 }
@@ -370,7 +462,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .pricing-card {
-  border: 1px solid var(--gray-200);
+  border: 1px solid var(--border);
   padding: 2.25rem;
   transition: border-color 0.3s, box-shadow 0.3s;
   display: flex;
@@ -380,40 +472,46 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 
 .pricing-card:hover {
-  border-color: var(--black);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  border-color: var(--teal);
+  box-shadow: 0 4px 20px rgba(22,92,80,0.06);
 }
 
 .pricing-card h3 {
-  font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-family: var(--font-subtitle);
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--near-black);
   margin-bottom: 0.5rem;
 }
 
 .pricing-card p {
   font-size: 0.82rem;
-  color: var(--gray-600);
+  color: var(--text-muted);
   font-weight: 300;
   line-height: 1.6;
   margin-bottom: 1.5rem;
 }
 
 .pricing-card .price {
-  font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-family: var(--font-subtitle);
+  font-size: 1.1rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.02em;
+  color: var(--copper);
 }
 
 /* ═══ CONTACT ═══ */
 .contact {
   padding: 6rem 2.5rem;
-  background: var(--black);
-  color: var(--white);
+  background: var(--near-black);
+  color: var(--cream);
 }
 
-.contact-grid {
+.contact-inner {
+  max-width: 1240px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 5rem;
@@ -421,45 +519,45 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .contact-left h2 {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 4.5vw, 3.5rem);
-  font-weight: 700;
-  line-height: 1.02;
-  letter-spacing: -0.03em;
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(1.8rem, 4.2vw, 3.2rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
   text-transform: uppercase;
+  color: var(--sage);
   margin-bottom: 1.5rem;
 }
 
 .contact-left > p {
   font-size: 0.9rem;
   font-weight: 300;
-  color: rgba(255,255,255,0.55);
+  color: rgba(249,248,245,0.5);
   line-height: 1.7;
   margin-bottom: 2.5rem;
 }
 
-.contact-channels {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+.contact-channels { display: flex; flex-direction: column; gap: 1rem; }
 
 .contact-channel {
   display: flex;
   align-items: center;
   gap: 1rem;
   font-size: 0.88rem;
-  color: rgba(255,255,255,0.7);
+  color: rgba(249,248,245,0.65);
   transition: color 0.2s;
 }
 
-.contact-channel:hover { color: var(--white); }
+.contact-channel:hover { color: var(--sage); }
 
 .contact-channel-label {
-  font-size: 0.62rem;
+  font-family: var(--font-subtitle);
+  font-size: 0.58rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.3);
-  width: 60px;
+  letter-spacing: 0.18em;
+  font-weight: 700;
+  color: rgba(249,248,245,0.25);
+  width: 55px;
   flex-shrink: 0;
 }
 
@@ -469,12 +567,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .form-field label {
   display: block;
-  font-size: 0.62rem;
+  font-family: var(--font-subtitle);
+  font-size: 0.6rem;
   text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.18em;
+  color: rgba(249,248,245,0.3);
   margin-bottom: 0.5rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .form-field input,
@@ -483,12 +582,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   width: 100%;
   padding: 0.75rem 0;
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.15);
+  border-bottom: 1px solid rgba(249,248,245,0.12);
   background: transparent;
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 300;
-  color: var(--white);
+  color: var(--cream);
   outline: none;
   transition: border-color 0.3s;
   -webkit-appearance: none;
@@ -497,67 +596,129 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .form-field input:focus,
 .form-field textarea:focus,
-.form-field select:focus {
-  border-color: rgba(255,255,255,0.6);
-}
+.form-field select:focus { border-color: var(--sage); }
 
 .form-field input::placeholder,
-.form-field textarea::placeholder {
-  color: rgba(255,255,255,0.25);
-}
+.form-field textarea::placeholder { color: rgba(249,248,245,0.2); }
 
-.form-field select option { background: var(--black); color: var(--white); }
+.form-field select option { background: var(--near-black); color: var(--cream); }
 
 .form-field textarea { resize: vertical; min-height: 100px; }
 
 .btn-submit {
   align-self: flex-start;
-  background: var(--white);
-  color: var(--black);
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  padding: 0.85rem 2.5rem;
+  font-family: var(--font-subtitle);
+  background: var(--teal);
+  color: var(--cream);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.5rem;
   transition: background 0.2s, transform 0.2s;
   margin-top: 0.5rem;
 }
 
-.btn-submit:hover { background: var(--gray-100); transform: translateY(-1px); }
+.btn-submit:hover { background: var(--copper); transform: translateY(-1px); }
+
+/* ═══ BIO ═══ */
+.bio { padding: 6rem 0; background: var(--cream); }
+
+.bio-inner {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.bio-photo {
+  aspect-ratio: 1/1;
+  background: var(--sage);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-subtitle);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--teal);
+  overflow: hidden;
+}
+
+.bio-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bio-text .bio-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  color: var(--copper);
+  margin-bottom: 0.3rem;
+}
+
+.bio-text .bio-role {
+  font-family: var(--font-subtitle);
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+.bio-text p {
+  font-size: 0.92rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
 
 /* ═══ FOOTER ═══ */
 .footer {
   padding: 2rem 2.5rem;
-  background: var(--black);
-  border-top: 1px solid rgba(255,255,255,0.08);
+  background: var(--near-black);
+  color: var(--cream);
+}
+
+.footer-inner {
+  max-width: 1240px;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: var(--white);
   flex-wrap: wrap;
   gap: 1rem;
 }
 
 .footer-left {
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-family: var(--font-subtitle);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  opacity: 0.35;
 }
 
-.footer-right {
-  display: flex;
-  gap: 1.5rem;
-  list-style: none;
-}
+.footer-right { display: flex; gap: 1.5rem; list-style: none; }
 
 .footer-right a {
-  font-size: 0.7rem;
-  color: rgba(255,255,255,0.35);
+  font-family: var(--font-subtitle);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(249,248,245,0.3);
   transition: color 0.2s;
 }
 
-.footer-right a:hover { color: var(--white); }
+.footer-right a:hover { color: var(--sage); }
 
 /* ═══ REVEAL ═══ */
 .reveal {
@@ -575,26 +736,32 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .nav-links.open {
     display: flex; flex-direction: column;
     position: fixed; inset: 0;
-    background: var(--white);
+    background: var(--cream);
     justify-content: center; align-items: center;
     gap: 2rem; z-index: 105;
   }
-  .nav-links.open a { font-size: 1.1rem; color: var(--black); }
+  .nav-links.open a { font-size: 1rem; color: var(--near-black); }
   .work-grid { grid-template-columns: 1fr; }
-  .about-strip { grid-template-columns: 1fr; gap: 2.5rem; padding: 5rem 2.5rem; }
+  .about-strip-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .pricing-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
   .form-row { grid-template-columns: 1fr; }
   .service-row { grid-template-columns: 1fr auto; }
   .service-row p { display: none; }
+  .bio-inner { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
+  .bio-photo { width: 160px; height: 160px; margin: 0 auto; }
 }
 
 @media (max-width: 600px) {
-  .hero { padding: 0 1.5rem 4rem; }
-  .hero h1 { font-size: 2.6rem; }
-  .work, .services, .pricing { padding: 4rem 1.5rem; }
-  .about-strip, .contact { padding: 4rem 1.5rem; }
-  .footer { padding: 1.5rem; flex-direction: column; text-align: center; }
+  .hero { min-height: auto; padding: 7rem 0 3rem; justify-content: flex-start; }
+  .hero-content { padding: 0 1.5rem; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero-scroll { display: none; }
+  .container { padding: 0 1.5rem; }
+  .about-strip { padding: 4rem 1.5rem; }
+  .contact { padding: 4rem 1.5rem; }
+  .footer { padding: 1.5rem; }
+  .footer-inner { flex-direction: column; text-align: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -602,24 +769,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
 }
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    /* Keep it light — agency sites like Collins/Pentagram are white-bg */
-  }
-}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="nav" id="nav">
-  <a href="#" class="nav-wordmark">Chanteé</a>
+  <a href="#" class="nav-wordmark">Chanteé the Designer & Co.</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#work">Work</a></li>
     <li><a href="#services">Services</a></li>
     <li><a href="#pricing">Pricing</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="#chantee">Chanteé</a></li>
     <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
   </ul>
   <button class="nav-toggle" id="navToggle" aria-label="Open menu">
@@ -629,167 +791,193 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-content reveal">
-    <h1>Make your brand as valuable as it is unforgettable.</h1>
-    <p class="hero-sub">Brand identity, book design, and web design for female entrepreneurs and thought leaders who refuse to blend in.</p>
+  <div class="hero-content">
+    <div class="hero-reveal">
+      <div class="hero-bar" id="heroBar"></div>
+      <h1 id="heroHeadline">Make Your Brand as Valuable as It Is Unforgettable.</h1>
+    </div>
+    <p class="hero-sub" id="heroSub">Brand identity, book design, and web design for female entrepreneurs and thought leaders who refuse to blend in.</p>
   </div>
   <span class="hero-scroll">Scroll</span>
 </section>
 
 <!-- WORK -->
 <section class="work" id="work">
-  <div class="work-header reveal">
-    <span class="section-title">Selected Work</span>
-    <a href="#">View All Projects</a>
-  </div>
-  <div class="work-grid">
-    <a href="#" class="work-card reveal">
-      <div class="work-card-img">
-        <span class="card-label">Becoming Studios</span>
-      </div>
-      <div class="work-card-info">
-        <h3>Becoming Studios</h3>
-        <p>A polished brand identity that elevated positioning and strengthened conversions for a high-end coaching business.</p>
-        <span class="work-card-tag">Brand Identity</span>
-      </div>
-    </a>
-    <a href="#" class="work-card reveal">
-      <div class="work-card-img">
-        <span class="card-label">Project Name</span>
-      </div>
-      <div class="work-card-info">
-        <h3>Project Name</h3>
-        <p>Custom book cover and interior typesetting that honored the author's voice and vision.</p>
-        <span class="work-card-tag">Book Design</span>
-      </div>
-    </a>
-    <a href="#" class="work-card reveal">
-      <div class="work-card-img">
-        <span class="card-label">Project Name</span>
-      </div>
-      <div class="work-card-info">
-        <h3>Project Name</h3>
-        <p>A luxury web presence designed to convert and communicate authority from the first scroll.</p>
-        <span class="work-card-tag">Web Design</span>
-      </div>
-    </a>
-    <a href="#" class="work-card reveal">
-      <div class="work-card-img">
-        <span class="card-label">Project Name</span>
-      </div>
-      <div class="work-card-info">
-        <h3>Project Name</h3>
-        <p>End-to-end brand transformation from strategy through every customer touchpoint.</p>
-        <span class="work-card-tag">Full Brand Suite</span>
-      </div>
-    </a>
+  <div class="container">
+    <div class="work-header reveal">
+      <span class="section-title">Selected Work</span>
+      <a href="#">View All Projects</a>
+    </div>
+    <div class="work-grid">
+      <a href="#" class="work-card reveal">
+        <div class="work-card-img"><span class="card-label">Becoming Studios</span></div>
+        <div class="work-card-info">
+          <h3>Becoming Studios</h3>
+          <p>A polished brand identity that elevated positioning and strengthened conversions for a high-end coaching business.</p>
+          <span class="work-card-tag">Brand Identity</span>
+        </div>
+      </a>
+      <a href="#" class="work-card reveal">
+        <div class="work-card-img"><span class="card-label">Project Name</span></div>
+        <div class="work-card-info">
+          <h3>Project Name</h3>
+          <p>Custom book cover and interior typesetting that honored the author's voice and vision.</p>
+          <span class="work-card-tag">Book Design</span>
+        </div>
+      </a>
+      <a href="#" class="work-card reveal">
+        <div class="work-card-img"><span class="card-label">Project Name</span></div>
+        <div class="work-card-info">
+          <h3>Project Name</h3>
+          <p>A luxury web presence designed to convert and communicate authority from the first scroll.</p>
+          <span class="work-card-tag">Web Design</span>
+        </div>
+      </a>
+      <a href="#" class="work-card reveal">
+        <div class="work-card-img"><span class="card-label">Project Name</span></div>
+        <div class="work-card-info">
+          <h3>Project Name</h3>
+          <p>End-to-end brand transformation from strategy through every customer touchpoint.</p>
+          <span class="work-card-tag">Full Brand Suite</span>
+        </div>
+      </a>
+    </div>
   </div>
 </section>
 
 <!-- ABOUT -->
 <section class="about-strip" id="about">
-  <div class="reveal">
-    <h2 class="about-strip-headline">We design brands that command attention.</h2>
-  </div>
-  <div class="about-strip-text reveal">
-    <p>Chanteé The Designer & Co. is a brand identity studio dedicated to amplifying the visions of female entrepreneurs and thought leaders who value premium, intentional design.</p>
-    <p>Every project is personal. Your brand should feel like an extension of you — polished, powerful, and positioned for growth. When we work together, you get more than deliverables. You get a creative partner invested in your success.</p>
-    <a href="#contact">Work with us →</a>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section class="services" id="services">
-  <div class="services-header reveal">
-    <span class="section-title">Services</span>
-  </div>
-  <div class="services-list">
-    <a href="#contact" class="service-row reveal">
-      <h3>Brand Identity Design</h3>
-      <p>Logos, color systems, typography, brand guidelines, and collateral.</p>
-      <span class="arr">→</span>
-    </a>
-    <a href="#contact" class="service-row reveal">
-      <h3>Book Cover & Typesetting</h3>
-      <p>Cover design, interior layout, and print-ready production files.</p>
-      <span class="arr">→</span>
-    </a>
-    <a href="#contact" class="service-row reveal">
-      <h3>Web Design</h3>
-      <p>Custom websites built to convert, captivate, and scale with you.</p>
-      <span class="arr">→</span>
-    </a>
-    <a href="#contact" class="service-row reveal">
-      <h3>Brand Strategy</h3>
-      <p>Positioning, messaging, and competitive differentiation.</p>
-      <span class="arr">→</span>
-    </a>
-    <a href="#contact" class="service-row reveal">
-      <h3>Brand Collateral & Print</h3>
-      <p>Business cards, social templates, packaging, and beyond.</p>
-      <span class="arr">→</span>
-    </a>
+  <div class="about-strip-inner">
+    <div class="reveal">
+      <h2 class="about-strip-headline">We Design Brands That Command Attention.</h2>
+    </div>
+    <div class="about-strip-text reveal">
+      <p>Chanteé The Designer & Co. is a brand identity studio dedicated to amplifying the visions of female entrepreneurs and thought leaders who value premium, intentional design.</p>
+      <p>Every project is personal. Your brand should feel like an extension of you — polished, powerful, and positioned for growth. When we work together, you get more than deliverables. You get a creative partner invested in your success.</p>
+      <a href="#contact">Work with us →</a>
+    </div>
   </div>
 </section>
 
 <!-- TESTIMONIAL -->
 <section class="testimonial">
-  <div class="testimonial-inner reveal">
-    <blockquote>"She not only designed a logo that exceeded my expectations, but created a brand identity that captures the essence of my company. Her communication and attention to detail made my experience truly top-tier."</blockquote>
-    <div class="testimonial-credit">
-      <strong>Tamara Jackson</strong> — Owner, Becoming Studios
+  <div class="container">
+    <div class="testimonial-inner reveal">
+      <blockquote>"She not only designed a logo that exceeded my expectations, but created a brand identity that captures the essence of my company. Her communication and attention to detail made my experience truly top-tier."</blockquote>
+      <div class="testimonial-credit">
+        Tamara Jackson <span>— Owner, Becoming Studios</span>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-header reveal">
+      <span class="section-title">Services</span>
+    </div>
+    <div class="services-list">
+      <a href="#contact" class="service-row reveal">
+        <h3>Brand Identity Design</h3>
+        <p>Logos, color systems, typography, brand guidelines, and collateral.</p>
+        <span class="arr">→</span>
+      </a>
+      <a href="#contact" class="service-row reveal">
+        <h3>Book Cover & Typesetting</h3>
+        <p>Cover design, interior layout, and print-ready production files.</p>
+        <span class="arr">→</span>
+      </a>
+      <a href="#contact" class="service-row reveal">
+        <h3>Web Design</h3>
+        <p>Custom websites built to convert, captivate, and scale with you.</p>
+        <span class="arr">→</span>
+      </a>
+      <a href="#contact" class="service-row reveal">
+        <h3>Brand Strategy</h3>
+        <p>Positioning, messaging, and competitive differentiation.</p>
+        <span class="arr">→</span>
+      </a>
+      <a href="#contact" class="service-row reveal">
+        <h3>Brand Collateral & Print</h3>
+        <p>Business cards, social templates, packaging, and beyond.</p>
+        <span class="arr">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO REEL — hidden until reel.mp4 is uploaded to the repo -->
+<section class="video-reel" id="videoReel">
+  <video autoplay loop muted playsinline oncanplay="document.getElementById('videoReel').classList.add('has-video')">
+    <source src="reel.mp4" type="video/mp4">
+  </video>
+</section>
+
 <!-- PRICING -->
 <section class="pricing" id="pricing">
-  <div class="pricing-header reveal">
-    <span class="section-title">Investment</span>
-    <p>Every package is tailored. Here's a starting point — reach out and we'll scope something custom.</p>
+  <div class="container">
+    <div class="pricing-header reveal">
+      <span class="section-title">Investment</span>
+      <p>Every package is tailored. Here's a starting point — reach out and we'll scope something custom.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal">
+        <div>
+          <h3>Brand Foundation</h3>
+          <p>Logo, color palette, typography, and brand board.</p>
+        </div>
+        <span class="price">From $X,XXX</span>
+      </div>
+      <div class="pricing-card reveal">
+        <div>
+          <h3>Full Brand Identity</h3>
+          <p>Complete visual identity system, guidelines, and collateral suite.</p>
+        </div>
+        <span class="price">From $X,XXX</span>
+      </div>
+      <div class="pricing-card reveal">
+        <div>
+          <h3>Book Design</h3>
+          <p>Cover design, interior typesetting, and print-ready layout.</p>
+        </div>
+        <span class="price">From $X,XXX</span>
+      </div>
+      <div class="pricing-card reveal">
+        <div>
+          <h3>Web Design</h3>
+          <p>Custom site designed and developed to match your brand.</p>
+        </div>
+        <span class="price">From $X,XXX</span>
+      </div>
+    </div>
   </div>
-  <div class="pricing-grid">
-    <div class="pricing-card reveal">
-      <div>
-        <h3>Brand Foundation</h3>
-        <p>Logo, color palette, typography, and brand board.</p>
+</section>
+
+<!-- BIO -->
+<section class="bio" id="chantee">
+  <div class="container">
+    <div class="bio-inner reveal">
+      <div class="bio-photo">Your Photo</div>
+      <div class="bio-text">
+        <h3 class="bio-name">Chanteé</h3>
+        <p class="bio-role">Founder & Creative Director</p>
+        <p>I'm a brand identity designer on a mission to amplify the visions of female entrepreneurs and thought leaders who refuse to settle for ordinary. With a background in visual design and a deep love for typography, I build brands that are equal parts strategy and soul. When I'm not designing, you'll find me exploring new creative inspirations, mentoring emerging designers, and dreaming up the next big project.</p>
       </div>
-      <span class="price">From $X,XXX</span>
-    </div>
-    <div class="pricing-card reveal">
-      <div>
-        <h3>Full Brand Identity</h3>
-        <p>Complete visual identity system, guidelines, and collateral suite.</p>
-      </div>
-      <span class="price">From $X,XXX</span>
-    </div>
-    <div class="pricing-card reveal">
-      <div>
-        <h3>Book Design</h3>
-        <p>Cover design, interior typesetting, and print-ready layout.</p>
-      </div>
-      <span class="price">From $X,XXX</span>
-    </div>
-    <div class="pricing-card reveal">
-      <div>
-        <h3>Web Design</h3>
-        <p>Custom site designed and developed to match your brand.</p>
-      </div>
-      <span class="price">From $X,XXX</span>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section class="contact" id="contact">
-  <div class="contact-grid">
+  <div class="contact-inner">
     <div class="contact-left reveal">
       <h2>Let's Build Something Worth Noticing.</h2>
       <p>Have a project in mind? Fill out the form or reach out directly. Whether you have a clear vision or you're still exploring — the conversation starts here.</p>
       <div class="contact-channels">
-        <a href="mailto:hello@chanteethedesigner.com" class="contact-channel">
+        <a href="mailto:contact@chanteethedesigner.com" class="contact-channel">
           <span class="contact-channel-label">Email</span>
-          hello@chanteethedesigner.com
+          contact@chanteethedesigner.com
         </a>
         <a href="#" class="contact-channel">
           <span class="contact-channel-label">Chat</span>
@@ -823,6 +1011,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
           <option>Brand Identity Design</option>
           <option>Book Cover & Typesetting</option>
           <option>Web Design</option>
+          <option>Event Branding</option>
+          <option>Packaging Design</option>
           <option>Full Brand Suite</option>
           <option>Not sure yet</option>
         </select>
@@ -838,25 +1028,31 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 <!-- FOOTER -->
 <footer class="footer">
-  <span class="footer-left">© 2026 Chanteé The Designer & Co.</span>
-  <ul class="footer-right">
-    <li><a href="#">Instagram</a></li>
-    <li><a href="#">LinkedIn</a></li>
-    <li><a href="#">Twitter</a></li>
-    <li><a href="#work">Work</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="footer-inner">
+    <span class="footer-left">© 2026 Chanteé The Designer & Co.</span>
+    <ul class="footer-right">
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">LinkedIn</a></li>
+      <li><a href="#">Threads</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script>
+// Nav scroll
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
 
+// Mobile menu
 const toggle = document.getElementById('navToggle');
 const links = document.getElementById('navLinks');
 toggle.addEventListener('click', () => links.classList.toggle('open'));
 links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
 
+// Scroll reveal
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -867,6 +1063,74 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Hero bar-reveal animation
+(function() {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const bar = document.getElementById('heroBar');
+  const headline = document.getElementById('heroHeadline');
+  const sub = document.getElementById('heroSub');
+  if (!bar || !headline || !sub) return;
+
+  // Set initial GSAP-managed state
+  gsap.set(bar, { xPercent: -50, yPercent: -50 });
+
+  const tl = gsap.timeline({ delay: 0.4 });
+
+  // 1. Small dot fades in (left of headline area)
+  tl.to(bar, {
+    opacity: 1,
+    duration: 0.25,
+    ease: 'power2.out'
+  })
+
+  // 2. Dot extends into a horizontal teal bar
+  .to(bar, {
+    width: 200,
+    height: 12,
+    borderRadius: '6px',
+    duration: 0.45,
+    ease: 'power3.inOut'
+  })
+
+  // 3. Bar rotates to ~55° diagonal
+  .to(bar, {
+    rotation: -55,
+    scaleY: 1.3,
+    duration: 0.35,
+    ease: 'power2.inOut'
+  })
+
+  // 4. Diagonal bar sweeps right across viewport, revealing headline
+  .to(bar, {
+    left: '110%',
+    top: '35%',
+    duration: 1.15,
+    ease: 'power2.inOut'
+  })
+  .to(headline, {
+    clipPath: 'polygon(0% 0%, 130% 0%, 100% 100%, 0% 100%)',
+    duration: 1.15,
+    ease: 'power2.inOut'
+  }, '<')
+
+  // 5. Bar fades out as it exits
+  .to(bar, {
+    opacity: 0,
+    duration: 0.25,
+    ease: 'power2.out'
+  }, '-=0.35')
+
+  // 6. Subtitle fades/slides in
+  .to(sub, {
+    opacity: 1,
+    y: 0,
+    duration: 0.55,
+    ease: 'power2.out'
+  }, '-=0.15');
+})();
 </script>
 </body>
 </html>
