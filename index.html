@@ -242,6 +242,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .work-card:nth-child(6) .work-card-img { background: var(--sage); color: var(--teal); }
 
 .work-card-img .card-label {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--font-subtitle);
   font-weight: 700;
   font-size: clamp(1rem, 2vw, 1.5rem);
@@ -249,6 +255,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   text-align: center;
   padding: 2rem;
   letter-spacing: 0.08em;
+  color: var(--white);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.35);
 }
 
 .work-card-img img {
@@ -994,12 +1002,11 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
         </div>
       </div>
       <div class="work-card reveal" data-modal="cs-3">
-        <div class="work-card-img"><img src="IMF Homepage Cards.jpg" alt="Ignite My Faith Global"></div>
-        <span class="card-label">Ignite My Faith Global</span>
+        <div class="IMF Homepage Cards.jpg"><span class="card-label">Ignite My Faith Global</span></div>
         <div class="work-card-info">
           <h3>Ignite My Faith Global</h3>
-          <p>A full brand identity system groung in both Christian authority and Ivy League inspired aesthetic.</p>
-          <span class="work-card-tag">Brand Identity + Web Design</span>
+          <p>A full brand identity system grounded in both Christian authority and Ivy League inspired aesthetic.</p>
+          <span class="work-card-tag">Brand ID + Creative Direction + Web Design</span>
         </div>
       </div>
       <div class="work-card reveal" data-modal="cs-4">
